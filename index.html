@@ -95,7 +95,7 @@ const TONES=["Агрессивная","Позитивная","Новости","�
 const VOICES=["Fenrir","Puck","Charon","Kore","Zephyr","Orus","Leda","Aoede"];
 const CAT={bg:["dark","light","accent","grid","rays","glow"],fx:["pop","slide","zoomin","stretch","type","strike","fade"],tr:["cut","flash","wipe","zoom","fade"],ch:["bar","line"],shp:["circle","ring","rect","line","arrow","play"],ico:["нет"],who:["нет"],models:["нет"],sfx:["нет"],music:["energetic"]};
 const S={font:FONTS[0],pal:{bg:"#050505",tx:"#ffffff",ac:"#c8ff2e"},fmt:"9:16",dur:30,tone:TONES[0],sc:null,st:[],total:0,audio:null,aud:null,blob:null,id:null};
-const icons=()=>lucide.createIcons();
+const icons=()=>{if(window.lucide?.createIcons){window.lucide.createIcons();return}if(!window.__lucideLoading){window.__lucideLoading=true;const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js";s.onload=()=>window.lucide?.createIcons();s.onerror=()=>{window.__lucideLoading=false};document.head.append(s)}};
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2600)}
 function busy(m){$("#busy").classList.toggle("on",!!m);$("#bt").textContent=m||""}
 
@@ -105,7 +105,7 @@ $("#island").innerHTML=TABS.map((t,i)=>`<button data-i="${i}"><i data-lucide="${
 function tab(i){$$(".view").forEach((v,j)=>v.classList.toggle("on",i==j));$$("#island button").forEach((b,j)=>b.classList.toggle("on",i==j));if(i==1)renderLib();if(i==2)renderProj();scrollTo(0,0)}
 $$("#island button").forEach(b=>b.onclick=()=>tab(+b.dataset.i));
 function chips(el,items,get,set,fmt=x=>x){const r=$(el);r.innerHTML=items.map((x,i)=>`<button class="chip${get(x)?" on":""}" data-i="${i}">${fmt(x)}</button>`).join("");r.querySelectorAll("button").forEach(b=>b.onclick=()=>{set(items[b.dataset.i]);chips(el,items,get,set,fmt)})}
-const drawFonts=()=>{$("#fonts").innerHTML=FONTS.map((f,i)=>`<button class="chip fnt${f===S.font?" on":""}" data-i="${i}" aria-pressed="${f===S.font}" style="font-family:'${f[0]}';font-weight:${f[1]}"><span>Аа Моушен</span><span class="fnt-name">${f[0]}</span></button>`).join("");$("#fonts button").forEach(b=>b.onclick=()=>{S.font=FONTS[b.dataset.i];drawFonts()})};
+const drawFonts=()=>{$("#fonts").innerHTML=FONTS.map((f,i)=>{const selected=f[0]===S.font[0];return `<button type="button" class="chip fnt${selected?" on":""}" data-i="${i}" aria-pressed="${selected}" style="font-family:'${f[0]}';font-weight:${f[1]}"><span>Аа Моушен</span><span class="fnt-name">${f[0]}</span></button>`}).join("");$("#fonts button").forEach(b=>b.onclick=()=>{const selected=FONTS[Number(b.dataset.i)];if(selected){S.font=selected;drawFonts()}})};
 function setPal(p){Object.assign(S.pal,p);["bg","tx","ac"].forEach((k,i)=>$("#c"+i).value=S.pal[k])}
 ["#c0","#c1","#c2"].forEach((id,i)=>$(id).oninput=e=>S.pal[["bg","tx","ac"][i]]=e.target.value);
 $("#pick").onclick=()=>$("#photo").click();
