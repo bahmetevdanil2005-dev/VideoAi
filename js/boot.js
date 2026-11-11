@@ -1,8 +1,8 @@
 /* Загрузчик: подгружает разделы (views/), остров и оверлеи (partials/), затем скрипты по порядку.
    Чтобы сбросить кэш после правок — увеличьте VER здесь и в index.html. */
-const VER=1;
+const VER=2;
 const VIEWS=["create","library","projects","content","settings"];
-const SCRIPTS=["core","island","create","settings","library","projects","director","voice","renderer","decorations","scene","player","export","main"];
+const SCRIPTS=["core","island","create","settings","library","projects","director","voice","renderer","decorations","icons","scene","player","export","main"];
 const get=u=>fetch(u+"?v="+VER).then(r=>{if(!r.ok)throw new Error(u+" — "+r.status);return r.text()});
 (async()=>{try{
  const [isl,ovl,...views]=await Promise.all(["partials/island.html","partials/overlays.html",...VIEWS.map(v=>"views/"+v+".html")].map(get));
