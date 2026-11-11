@@ -1,0 +1,16 @@
+<section class="view on" id="v0"><h1>Создать видео</h1>
+<div class="card"><h3>Шрифт</h3><div class="fg" id="fonts"></div></div>
+<div class="card"><h3>Цвета</h3><p class="sub">Выберите вручную или возьмите с фото — потом можно поправить.</p>
+<div class="row"><button class="btn" id="pick"><i data-lucide="image"></i>Цвета с фото</button><input type="file" id="photo" accept="image/*" hidden></div>
+<div class="sw"><label>Фон<input type="color" id="c0"></label><label>Текст<input type="color" id="c1"></label><label>Акцент<input type="color" id="c2"></label></div></div>
+<div class="card"><h3>Тема видео</h3><input id="topic" placeholder="Например: как нейросети меняют монтаж"></div>
+<div class="card"><h3>Что хотите увидеть</h3><textarea id="wish" placeholder="Опишите сцены, настроение, ключевые фразы, что показать на экране…"></textarea></div>
+<div class="card"><h3>Формат и время</h3><div class="chips" id="fmt"></div><div class="chips" id="dur" style="margin-top:10px"></div></div>
+<div class="card"><h3>Подача</h3><div class="chips" id="tone"></div><input id="tone2" placeholder="Или впишите свою подачу" style="margin-top:10px"></div>
+<div class="row"><button class="btn w" id="go1"><i data-lucide="mic"></i>Создать с озвучкой</button><button class="btn w" id="go0" style="background:none;color:#fff;border-color:#fff"><i data-lucide="volume-x"></i>Без озвучки</button></div>
+<div id="res" style="display:none;margin-top:22px">
+<canvas id="cv"></canvas>
+<div class="ctl"><button class="chip" id="pp"><i data-lucide="play"></i></button><input type="range" id="seek" min="0" max="1000" value="0"><span id="tm">0:00</span></div>
+<div class="row"><button class="btn" id="bedit"><i data-lucide="wand-sparkles"></i>Сделать правки</button><button class="btn" id="bvoice"><i data-lucide="mic"></i>Озвучить</button></div>
+<div id="editbox" style="display:none;margin-top:10px"><textarea id="einst" placeholder="Что изменить? Например: сделай начало агрессивнее, добавь график"></textarea><button class="btn w" id="eapply" style="margin-top:8px">Применить правки</button></div>
+<button class="btn w" id="dl" style="margin-top:12px"><i data-lucide="download"></i>Скачать</button></div></section>
