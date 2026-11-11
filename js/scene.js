@@ -17,7 +17,8 @@ function cube(a,A){const k=.87*a,q=(...p)=>{cx.beginPath();p.forEach((v,i)=>i?cx
 function scene(t){const sc=S.sc.scenes;let i=0;while(i<sc.length-1&&t>=S.st[i+1])i++;const s=sc[i],lt=t-S.st[i],W=cv.width,H=cv.height,P=S.pal,id=s.bg||"dark",inv=id==="light"||id==="paper",acc=id==="accent";
  const C={b:inv?(id==="paper"?mixc(P.tx,"#d9d3c5",.18):P.tx):acc?P.ac:P.bg,f:inv?P.bg:acc?P.bg:P.tx,a:inv||acc?P.bg:P.ac,inv,acc},tp=E.cl(lt/.4);
  cx.save();if(s.trans==="zoom"){const z=1+.18*(1-E.out(tp));cx.translate(W/2,H/2);cx.scale(z,z);cx.translate(-W/2,-H/2)}
- bgDraw(id,C,lt);(s.layers||[]).forEach(L=>{try{const k=L.type;if(k==="text")textL(L,lt,C,0);else if(k==="mega")textL(L,lt,C,1);else if(k==="shape"||k==="icon"||k==="char"||k==="three")shape(L,lt,C);
+ bgDraw(id,C,lt);(s.layers||[]).forEach(L=>{try{const k=L.type;if(k==="text")textL(L,lt,C,0);else if(k==="mega")textL(L,lt,C,1);else if(k==="shape"||k==="char"||k==="three")shape(L,lt,C);
+  else if(k==="icon"||k==="icons")iconsL(L,lt,C);
   else if(k==="ui"||k==="deco")deco(L,lt,C);else if(k==="svg")svgL(L,lt);else if(k==="chart")chart(L,lt,C);else if(k==="asset")asset(L,lt);
   else if(k==="counter")textL({...L,text:"*"+Math.round((+L.to||0)*E.out(E.cl((lt-(L.at||0))/1.2)))+(L.suffix||"")+"*",size:L.size||.2,fx:"pop"},lt,C,1)}catch(e){}});cx.restore();
  if(tp<1){if(s.trans==="flash"){cx.fillStyle=`rgba(255,255,255,${.9*(1-tp)})`;cx.fillRect(0,0,W,H)}else if(s.trans==="wipe"){cx.fillStyle=P.ac;cx.fillRect(W*E.out(tp),0,W,H)}else if(s.trans==="fade"){cx.fillStyle=`rgba(0,0,0,${1-tp})`;cx.fillRect(0,0,W,H)}}}
